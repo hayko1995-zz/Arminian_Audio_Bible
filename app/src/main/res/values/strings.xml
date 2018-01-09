@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Audio Bible Armenian</string>
+    <string name="action_settings">Settings</string>
+    <string name="textview">TextView</string>
+    <string name="play">play</string>
+    <string name="prew">prew</string>
+    <string name="next">next</string>
+    <string name="glxi_anun">glxi_anun</string>
+</resources>
