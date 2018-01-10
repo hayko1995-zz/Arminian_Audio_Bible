@@ -63,7 +63,7 @@ public class Player extends AppCompatActivity {
             arr[i] = String.valueOf(i+1);
         }
 
-        url = "http://derekprince.ru/audiofiles/hy/"+erg + "1" + "mp3";
+        url = "http://derekprince.ru/audiofiles/hy/"+erg +selected + "mp3";
 
 
 
@@ -107,12 +107,18 @@ public class Player extends AppCompatActivity {
                     mediaPlayer.reset();
                     play_button.setImageResource(android.R.drawable.ic_media_play);
                 } else {
-
+                    listView.setEnabled(false);
+                    play_button.setEnabled(false);
+                    prev_button.setEnabled(false);
+                    next_button.setEnabled(false);
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     mediaPlayer.setDataSource(url);
                     mediaPlayer.prepare();
                     mediaPlayer.start();
-
+                    listView.setEnabled(true);
+                    play_button.setEnabled(true);
+                    prev_button.setEnabled(true);
+                    next_button.setEnabled(true);
 
                     play_button.setImageResource(android.R.drawable.ic_media_pause);
                 }
