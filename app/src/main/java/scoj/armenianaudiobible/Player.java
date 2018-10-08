@@ -4,6 +4,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -63,8 +64,8 @@ public class Player extends AppCompatActivity {
             arr[i] = String.valueOf(i+1);
         }
 
-        url = "http://derekprince.ru/audiofiles/hy/"+erg +"/"+selected + ".mp3";
-
+        url = "https://www.derekprincearmenia.com/audiofiles/hy/"+erg +"/"+selected + ".mp3";
+        Log.i("url",url);
 
 
 
@@ -87,7 +88,7 @@ public class Player extends AppCompatActivity {
 
 
                 if(mediaPlayer.isPlaying())play_button.performClick();
-                url = "http://derekprince.ru/audiofiles/hy/"+ erg1+"/"+ selected+ ".mp3";
+                url = "https://www.derekprincearmenia.com/audiofiles/hy/"+erg1 +"/"+selected + ".mp3";
                 play_button.performClick();
 
             }
