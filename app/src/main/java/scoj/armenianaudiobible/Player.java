@@ -141,7 +141,7 @@ public class Player extends AppCompatActivity {
             }
             else{selected = String.valueOf(a+1);}
             if(mediaPlayer.isPlaying())play_button.performClick();
-            url = "http://derekprince.ru/audiofiles/hy/"+ erg1+"/"+ selected+ ".mp3";
+            url = "https://www.derekprincearmenia.com/audiofiles/hy/"+erg1 +"/"+selected + ".mp3";
             play_button.performClick();
 
 
@@ -157,7 +157,7 @@ public class Player extends AppCompatActivity {
             else{
                 selected = String.valueOf(a-1);}
             if(mediaPlayer.isPlaying())play_button.performClick();
-            url = "http://derekprince.ru/audiofiles/hy/"+ erg1+"/"+ selected+ ".mp3";
+            url =  "https://www.derekprincearmenia.com/audiofiles/hy/"+erg1 +"/"+selected + ".mp3";
             play_button.performClick();
         }
     };
