@@ -1,14 +1,16 @@
 package scoj.armenianaudiobible;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        boolean chack = false;
 
 
 
@@ -34,13 +37,15 @@ public class MainActivity extends AppCompatActivity {
         final String[] erger = getResources().getStringArray(R.array.erger);
         final String[] cucak = getResources().getStringArray(R.array.cucak);
 
-        // создаем адаптер
+
         adapter = new ArrayAdapter<>(
                 MainActivity.this,
                 android.R.layout.simple_list_item_1,
                 gluxner_arr);
 
-
+        if (chack == false) {
+            chack = isReadStoragePermissionGranted();
+        }
 
 
 
@@ -81,5 +86,40 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isReadStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 3);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+
+            return true;
+        }
+    }
+
+    public boolean isWriteStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+
+                return true;
+            } else {
+
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+
+            return true;
+        }
     }
 }
