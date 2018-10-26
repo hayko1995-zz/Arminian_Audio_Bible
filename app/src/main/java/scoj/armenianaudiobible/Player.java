@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,8 +30,9 @@ public class Player extends AppCompatActivity {
     private ListView listView = null;
     String selected = "1";
     String url;
-    Uri uri;
+    String fileName;
     String carent_file;
+    String pathDir = "/Android/data/scoj.armenianaudiobible/files/Music";
     String erg1;
     int cank;
     Long referance = Long.valueOf(0);
@@ -46,6 +48,7 @@ public class Player extends AppCompatActivity {
     View.OnClickListener play = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            fileName = erg1 + "_" + selected + ".mp3";
             try {
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
@@ -56,7 +59,7 @@ public class Player extends AppCompatActivity {
 
                     //prev_button.setEnabled(false);
                     //next_button.setEnabled(false);
-                    carent_file = Environment.getExternalStoragePublicDirectory(Environment.getExternalStorageState()).toString() + "/" + erg1 + "_" + selected + ".mp3";
+                    carent_file = Environment.getExternalStorageDirectory().getPath().toString() + pathDir + "/" + fileName;
                     File f = new File(carent_file);
                     if (f.exists()) {
                         mediaPlayer.setDataSource(carent_file);
@@ -73,14 +76,15 @@ public class Player extends AppCompatActivity {
                         downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
                         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
                         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                        request.setDestinationInExternalPublicDir(Environment.getExternalStorageState(), erg1 + "_" + selected + ".mp3");
+                        //request.setDestinationInExternalPublicDir(Environment.getExternalStorageState(), erg1 + "_" + selected + ".mp3");
+                        request.setDestinationInExternalFilesDir(Player.this, Environment.DIRECTORY_MUSIC, fileName);
                         referance = downloadManager.enqueue(request);
 
-                        carent_file = Environment.getExternalStoragePublicDirectory(Environment.getExternalStorageState()).toString() + "/" + erg1 + "_" + selected + ".mp3";
 
-                        //todo request.setDestinationInExternalFilesDir( Environment.DIRECTORY_DOWNLOADS,"a");
+                        carent_file = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + pathDir + "/" + fileName;
+                        Log.i("aaa", carent_file);
                         //mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                        //if(Long.valueOf(0) == referance){play_button.performClick();referance = Long.valueOf(0);}
+                        //if(Long.valueOf(0) != referance){play_button.performClick();referance = Long.valueOf(0);}
 
                     }
 
